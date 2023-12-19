@@ -31,11 +31,11 @@ with tab1:
         
     with st.container(border=True):
         st.caption('Choose the :blue[**_STYLE_**] you want to apply')
-        mask_image = image_select('',["../style_transfer/style_images/white.jpeg",
-                                    "../style_transfer/style_images/monalisa.jpeg",
-                                    "../style_transfer/style_images/starry_night.jpeg",
-                                    "../style_transfer/style_images/scream.jpeg",
-                                    "../style_transfer/style_images/girldance.jpeg",
+        mask_image = image_select('',["/style_transfer/style_images/white.jpeg",
+                                    "/style_transfer/style_images/monalisa.jpeg",
+                                    "/style_transfer/style_images/starry_night.jpeg",
+                                    "/style_transfer/style_images/scream.jpeg",
+                                    "/style_transfer/style_images/girldance.jpeg",
                                     "../style_transfer/style_images/greatwave.jpeg",
                                     "../style_transfer/style_images/impression.jpeg",
                                     "../style_transfer/style_images/persistence.jpeg",
