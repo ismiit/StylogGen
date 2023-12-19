@@ -8,7 +8,7 @@ import tensorflow as tf
 from matplotlib import gridspec
 import functools
 import os
-import cv2 
+#import cv2 
 import tensorflow_hub as hub
 import PIL
 import time
