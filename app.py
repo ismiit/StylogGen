@@ -8,22 +8,22 @@ import tensorflow as tf
 from matplotlib import gridspec
 import functools
 import os
-#import cv2 
+import cv2 
 import tensorflow_hub as hub
 import PIL
 import time
 
 #st.set_page_config(layout="wide")
-with st.container(border=True):
+with st.container(border=True):     # ------------> Creating the header and subheader
 
-    st.header('StyloGEN', divider = 'rainbow')
+    st.header('StyloGEN', divider = 'rainbow')     
     st.subheader('_Style_ :blue[yourself] on the go :sunglasses:')
 
 
-with st.container(border=True):
+with st.container(border=True):     # ------------> Creating the tabs for options
     tab1, tab2, tab3 = st.tabs(["Upload Image", "Paste Link", "Live Capture"])
 
-with tab1:
+with tab1: # ------------> Creating two images tab
 
     with st.container(border=True):
         st.caption('Choose the :red[**_BASE_**] image')
@@ -31,18 +31,18 @@ with tab1:
         
     with st.container(border=True):
         st.caption('Choose the :blue[**_STYLE_**] you want to apply')
-        mask_image = image_select('',["./style_transfer/style_images/white.jpeg",
-                                    "./style_transfer/style_images/monalisa.jpeg",
-                                    "./style_transfer/style_images/starry_night.jpeg",
-                                    "./style_transfer/style_images/scream.jpeg",
-                                    "./style_transfer/style_images/girldance.jpeg",
-                                    "./style_transfer/style_images/greatwave.jpeg",
-                                    "./style_transfer/style_images/impression.jpeg",
-                                    "./style_transfer/style_images/persistence.jpeg",
-                                    "./style_transfer/style_images/efortvaux.jpeg",
-                                    "./style_transfer/style_images/wanderer.jpeg",
-                                    "./style_transfer/style_images/eninthwave.jpeg",
-                                    "./style_transfer/style_images/gypsy.jpeg"],
+        mask_image = image_select('',["style_transfer\style_images\white.jpeg",
+                                    "style_transfer\style_images\monalisa.jpeg",
+                                    "style_transfer\style_images\starry_night.jpeg",
+                                    "style_transfer\style_images\scream.jpeg",
+                                    "style_transfer\style_images\girldance.jpeg",
+                                    "style_transfer\style_images\greatwave.jpeg",
+                                    "style_transfer\style_images\impression.jpeg",
+                                    "style_transfer\style_images\persistence.jpeg",
+                                    "style_transfer\style_images\efortvaux.jpeg",
+                                    "style_transfer\style_images\wanderer.jpeg",
+                                    "style_transfer\style_images\eninthwave.jpeg",
+                                    "style_transfer\style_images\gypsy.jpeg"],
                                     captions=["None","Monalisa", "Starry Night", "Scream",'Girldance',
                                                 'Greatwave','Impression', 'Persistence','Fortvaux','Wanderer','NinthWave','Gypsy'])
 
@@ -65,8 +65,20 @@ with tab1:
         with col2:
                 with st.container(border=True):
                     st.caption(':blue[**_STYLE IMAGE_**]')
-                    if mask_image != "./style_transfer/style_images/white.jpeg":
+                    if mask_image != "style_transfer\style_images\white.jpeg":
                         st.image(mask_image)
+
+
+    with st.container(border=True):
+
+        CHOICES = {240: "240p", 360: "360", 720: "720", 1080: '1080', 1440:'1440', 2160:'2160'}
+        def format_func(option):
+            return CHOICES[option]
+
+        image_value = st.select_slider('Select quality of generated image',
+        options=list(CHOICES.keys()),format_func = format_func,  key = 'slider-1')
+
+    image_size = image_value
 
 
     st.button("Reset", type="primary")
@@ -91,11 +103,11 @@ with tab1:
                 image = tf.image.resize(image, image_size, preserve_aspect_ratio=True)
                 return image
 
-            generated_image_size = 384
+            generated_image_size = image_size
             original_image_size = (generated_image_size, generated_image_size)
             mask_image_size = (256, 256)
             mask_image_path = mask_image
-            original_image_path = './tempDir/download.jpeg'
+            original_image_path = 'tempDir\download.jpeg'
 
             original_image = load_image(original_image_path, original_image_size)
             mask_image = load_image(mask_image_path, mask_image_size)
@@ -166,6 +178,16 @@ with tab2:
                     st.caption(':blue[**_STYLE IMAGE_**]')
                     if mask_image_url != 'style link':
                         st.image(mask_image_url)
+    with st.container(border=True):
+
+        CHOICES = {240: "240p", 360: "360", 720: "720", 1080: '1080', 1440:'1440', 2160:'2160'}
+        def format_func(option):
+            return CHOICES[option]
+
+        image_value = st.select_slider('Select quality of generated image',
+        options=list(CHOICES.keys()),format_func = format_func,  key = 'slider-2')
+
+    image_size = image_value
 
     st.button("Reset", type="primary", key = 'reset2')
     if st.button('GENERATE', key = 'generate_link'):
@@ -188,11 +210,11 @@ with tab2:
                 image = tf.image.resize(image, image_size, preserve_aspect_ratio=True)
                 return image
 
-            generated_image_size = 384
+            generated_image_size = image_size
             original_image_size = (generated_image_size, generated_image_size)
             mask_image_size = (256, 256)
-            original_image_url =  tf.keras.utils.get_file('original_image.jpeg', original_image_url)
-            mask_image_url =  tf.keras.utils.get_file('mask_image.jpeg', mask_image_url)
+            original_image_url =  tf.keras.utils.get_file('original_image.jpg', original_image_url)
+            mask_image_url =  tf.keras.utils.get_file('mask_image.jpg', mask_image_url)
             original_image = load_image(original_image_url, original_image_size)
             mask_image = load_image(mask_image_url, mask_image_size)
             mask_image = tf.nn.avg_pool(mask_image, ksize = [3,3], strides = [1,1], padding = 'SAME')
@@ -242,18 +264,18 @@ with tab3:
 
     with st.container(border=True):
         st.caption('Choose the :blue[**_STYLE_**] you want to apply')
-        mask_image = image_select('',["./style_transfer/style_images/white.jpeg",
-                                    "./style_transfer/style_images/monalisa.jpeg",
-                                    "./style_transfer/style_images/starry_night.jpeg",
-                                    "./style_transfer/style_images/scream.jpeg",
-                                    "./style_transfer/style_images/girldance.jpeg",
-                                    "./style_transfer/style_images/greatwave.jpeg",
-                                    "./style_transfer/style_images/impression.jpeg",
-                                    "./style_transfer/style_images/persistence.jpeg",
-                                    "./style_transfer/style_images/efortvaux.jpeg",
-                                    "./style_transfer/style_images/wanderer.jpeg",
-                                    "./style_transfer/style_images/eninthwave.jpeg",
-                                    "./style_transfer/style_images/gypsy.jpeg"],
+        mask_image = image_select('',["style_transfer\style_images\white.jpeg",
+                                    "style_transfer\style_images\monalisa.jpeg",
+                                    "style_transfer\style_images\starry_night.jpeg",
+                                    "style_transfer\style_images\scream.jpeg",
+                                    "style_transfer\style_images\girldance.jpeg",
+                                    "style_transfer\style_images\greatwave.jpeg",
+                                    "style_transfer\style_images\impression.jpeg",
+                                    "style_transfer\style_images\persistence.jpeg",
+                                    "style_transfer\style_images\efortvaux.jpeg",
+                                    "style_transfer\style_images\wanderer.jpeg",
+                                    "style_transfer\style_images\eninthwave.jpeg",
+                                    "style_transfer\style_images\gypsy.jpeg"],
                                     captions=["None","Monalisa", "Starry Night", "Scream",'Girldance',
                                                 'Greatwave','Impression', 'Persistence','Fortvaux','Wanderer','NinthWave','Gypsy'], key='image_select2')
 
@@ -274,8 +296,19 @@ with tab3:
         with col2:
                 with st.container(border=True):
                     st.caption(':blue[**_STYLE IMAGE_**]')
-                    if mask_image != "./style_transfer/style_images/white.jpeg":
+                    if mask_image != "style_transfer\style_images\white.jpeg":
                         st.image(mask_image)
+
+    with st.container(border=True):
+
+        CHOICES = {240: "240p", 360: "360", 720: "720", 1080: '1080', 1440:'1440', 2160:'2160'}
+        def format_func(option):
+            return CHOICES[option]
+
+        image_value = st.select_slider('Select quality of generated image',
+        options=list(CHOICES.keys()),format_func = format_func,  key = 'slider-3')
+
+    image_size = image_value
     
     st.button("Reset", type="primary", key = 'reset3')
 
@@ -299,11 +332,11 @@ with tab3:
                 image = tf.image.resize(image, image_size, preserve_aspect_ratio=True)
                 return image
 
-            generated_image_size = 384
+            generated_image_size = image_size
             original_image_size = (generated_image_size, generated_image_size)
             mask_image_size = (256, 256)
             mask_image_path = mask_image
-            original_image_path = './tempDir/capture.jpeg'
+            original_image_path = 'tempDir\capture.jpeg'
 
             original_image = load_image(original_image_path, original_image_size)
             mask_image = load_image(mask_image_path, mask_image_size)
