@@ -31,18 +31,18 @@ with tab1: # ------------> Creating two images tab
         
     with st.container(border=True):
         st.caption('Choose the :blue[**_STYLE_**] you want to apply')
-        mask_image = image_select('',["style_transfer\style_images\white.jpeg",
-                                    "style_transfer\style_images\monalisa.jpeg",
-                                    "style_transfer\style_images\starry_night.jpeg",
-                                    "style_transfer\style_images\scream.jpeg",
-                                    "style_transfer\style_images\girldance.jpeg",
-                                    "style_transfer\style_images\greatwave.jpeg",
-                                    "style_transfer\style_images\impression.jpeg",
-                                    "style_transfer\style_images\persistence.jpeg",
-                                    "style_transfer\style_images\efortvaux.jpeg",
-                                    "style_transfer\style_images\wanderer.jpeg",
-                                    "style_transfer\style_images\eninthwave.jpeg",
-                                    "style_transfer\style_images\gypsy.jpeg"],
+        mask_image = image_select('',["./style_transfer/style_images/white.jpeg",
+                                    "./style_transfer/style_images/monalisa.jpeg",
+                                    "./style_transfer/style_images/starry_night.jpeg",
+                                    "./style_transfer/style_images/scream.jpeg",
+                                    "./style_transfer/style_images/girldance.jpeg",
+                                    "./style_transfer/style_images/greatwave.jpeg",
+                                    "./style_transfer/style_images/impression.jpeg",
+                                    "./style_transfer/style_images/persistence.jpeg",
+                                    "./style_transfer/style_images/efortvaux.jpeg",
+                                    "./style_transfer/style_images/wanderer.jpeg",
+                                    "./style_transfer/style_images/eninthwave.jpeg",
+                                    "./style_transfer/style_images/gypsy.jpeg"],
                                     captions=["None","Monalisa", "Starry Night", "Scream",'Girldance',
                                                 'Greatwave','Impression', 'Persistence','Fortvaux','Wanderer','NinthWave','Gypsy'])
 
@@ -65,7 +65,7 @@ with tab1: # ------------> Creating two images tab
         with col2:
                 with st.container(border=True):
                     st.caption(':blue[**_STYLE IMAGE_**]')
-                    if mask_image != "style_transfer\style_images\white.jpeg":
+                    if mask_image != "./style_transfer/style_images/white.jpeg":
                         st.image(mask_image)
 
 
@@ -107,7 +107,7 @@ with tab1: # ------------> Creating two images tab
             original_image_size = (generated_image_size, generated_image_size)
             mask_image_size = (256, 256)
             mask_image_path = mask_image
-            original_image_path = 'tempDir\download.jpeg'
+            original_image_path = './tempDir/download.jpeg'
 
             original_image = load_image(original_image_path, original_image_size)
             mask_image = load_image(mask_image_path, mask_image_size)
@@ -264,18 +264,18 @@ with tab3:
 
     with st.container(border=True):
         st.caption('Choose the :blue[**_STYLE_**] you want to apply')
-        mask_image = image_select('',["style_transfer\style_images\white.jpeg",
-                                    "style_transfer\style_images\monalisa.jpeg",
-                                    "style_transfer\style_images\starry_night.jpeg",
-                                    "style_transfer\style_images\scream.jpeg",
-                                    "style_transfer\style_images\girldance.jpeg",
-                                    "style_transfer\style_images\greatwave.jpeg",
-                                    "style_transfer\style_images\impression.jpeg",
-                                    "style_transfer\style_images\persistence.jpeg",
-                                    "style_transfer\style_images\efortvaux.jpeg",
-                                    "style_transfer\style_images\wanderer.jpeg",
-                                    "style_transfer\style_images\eninthwave.jpeg",
-                                    "style_transfer\style_images\gypsy.jpeg"],
+        mask_image = image_select('',["./style_transfer/style_images/white.jpeg",
+                                    "./style_transfer/style_images/monalisa.jpeg",
+                                    "./style_transfer/style_images/starry_night.jpeg",
+                                    "./style_transfer/style_images/scream.jpeg",
+                                    "./style_transfer/style_images/girldance.jpeg",
+                                    "./style_transfer/style_images/greatwave.jpeg",
+                                    "./style_transfer/style_images/impression.jpeg",
+                                    "./style_transfer/style_images/persistence.jpeg",
+                                    "./style_transfer/style_images/efortvaux.jpeg",
+                                    "./style_transfer/style_images/wanderer.jpeg",
+                                    "./style_transfer/style_images/eninthwave.jpeg",
+                                    "./style_transfer/style_images/gypsy.jpeg"],
                                     captions=["None","Monalisa", "Starry Night", "Scream",'Girldance',
                                                 'Greatwave','Impression', 'Persistence','Fortvaux','Wanderer','NinthWave','Gypsy'], key='image_select2')
 
@@ -296,7 +296,7 @@ with tab3:
         with col2:
                 with st.container(border=True):
                     st.caption(':blue[**_STYLE IMAGE_**]')
-                    if mask_image != "style_transfer\style_images\white.jpeg":
+                    if mask_image != "./style_transfer/style_images/white.jpeg":
                         st.image(mask_image)
 
     with st.container(border=True):
@@ -336,7 +336,7 @@ with tab3:
             original_image_size = (generated_image_size, generated_image_size)
             mask_image_size = (256, 256)
             mask_image_path = mask_image
-            original_image_path = 'tempDir\capture.jpeg'
+            original_image_path = './tempDir/capture.jpeg'
 
             original_image = load_image(original_image_path, original_image_size)
             mask_image = load_image(mask_image_path, mask_image_size)
